@@ -6,7 +6,11 @@ var Movie = require('./models/movie')
 var port = process.env.PORT||3000;
 var app = express();
 
-mongoose.connect('mongodb://localhost/imooc')
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/imooc', {
+  useMongoClient: true,
+  /* other options */
+})
 
 app.set('views','./views/pages');
 app.set('view engine','jade');
