@@ -12,7 +12,7 @@ app.set('views','./views/pages');
 app.set('view engine','jade');
 //app.use(express.bodyParser())
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname,'public')));
 app.locals.moment = require('moment')
 app.listen(port);
@@ -69,7 +69,8 @@ app.get('/admin/update/:id',function(req,res){
 	}
 })
 
-app.post('/admin/movie/new',function(res,req){
+app.post('/admin/movie/new',function(req,res){
+	console.log(req.body);
 	var id = req.body.movie._id
 	var movieObj = req.body.movie;
 	var _movie
@@ -119,7 +120,7 @@ app.get('/admin/list',function(req,res){
 })
 
 app.get('/api/admin/list',function(req,res){
-	res.json({
+	res.jsonp({
 		title:'imooc 后台列表页',
 		movies:[{
 			_id:1,
